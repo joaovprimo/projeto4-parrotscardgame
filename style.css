@@ -44,12 +44,16 @@ align-items: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 30px;
+}
+.card:hover{
+    
 }
 .card-back{
-
+    display: initial;
 }
 .card-front{
-    display: none;
+    display: initial;
 }
 .img-back{
 width: 100px;
@@ -57,8 +61,9 @@ width: 100px;
 .img-front{
     width: 100px;
     }
-
-
+.desativa{
+    display: none;
+}
 @media (max-width:767px){
    body{
     height: 100%;
