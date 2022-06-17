@@ -1,12 +1,14 @@
 
 let arrImg=[
-`<img src="./bobrossparrot.gif">`,
-`<img src="./explodyparrot.gif">`,
-`<img src="./fiestaparrot.gif">`,
-`<img src="./metalparrot.gif">`,
-`<img src="./revertitparrot.gif">`,
-`<img src="./tripletsparrot.gif">`,
-`<img src="./unicornparrot.gif">`];
+`<img class="img-front" src="./bobrossparrot.gif">`,
+`<img class="img-front" src="./explodyparrot.gif">`,
+`<img class="img-front" src="./fiestaparrot.gif">`,
+`<img class="img-front" src="./metalparrot.gif">`,
+`<img class="img-front" src="./revertitparrot.gif">`,
+`<img class="img-front" src="./tripletsparrot.gif">`,
+`<img class="img-front" src="./unicornparrot.gif">`
+];
+let contador = arrImg.length;
 let card;
 
 function cardGame(){
@@ -24,17 +26,31 @@ while(carta%2==!0){
 distribuiCartas(carta);
 }
 
-function distribuiCartas(elemento){
-    document.querySelector(".cards").innerHTML="";
+function comparador(){
+    return Math.random() - 0.5; 
+}
 
-for(let cont=0; cont<elemento;cont++){
+function distribuiCartas(elemento){
+    let cards = document.querySelector(".cards");
+    cards.innerHTML='';
+let pares = elemento/2;
+arrImg.sort(comparador);
+for(j=arrImg.length;j>pares;j--){
+
+    arrImg.pop();
+
+}
+for(i=0; i<2;i++){
+arrImg.sort(comparador);
+for(let cont=0; cont<pares;cont++){
     let adcCards= `<div class="card"> 
     <div class="card-back">
         <img class="img-back" src="./front.png">
     </div>
     <div class="card-front">
-        <img class="img-front" src="./metalparrot.gif">
+        ${arrImg[cont]}
     </div>`;
-    document.querySelector(".cards").innerHTML += adcCards;
+    cards.innerHTML+=adcCards;
+}
 }
 }
