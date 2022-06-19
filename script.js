@@ -1,13 +1,22 @@
-
-
+let elemento;
+let primeiraCarta;
+let segundaCarta;
+let pegacarta1;
+let pegacarta2;
+let pegacarta3;
+let pegacarta4;
+let srcPr;
+let srcSg ;
+let retira; 
+let retira2;
 let arrImg=[
-`<img class="img-front" src="./bobrossparrot.gif">`,
-`<img class="img-front" src="./explodyparrot.gif">`,
-`<img class="img-front" src="./fiestaparrot.gif">`,
-`<img class="img-front" src="./metalparrot.gif">`,
-`<img class="img-front" src="./revertitparrot.gif">`,
-`<img class="img-front" src="./tripletsparrot.gif">`,
-`<img class="img-front" src="./unicornparrot.gif">`
+"./bobrossparrot.gif",
+"./explodyparrot.gif",
+"./fiestaparrot.gif",
+"./metalparrot.gif",
+"./revertitparrot.gif",
+"./tripletsparrot.gif",
+"./unicornparrot.gif"
 ];
 let contador = arrImg.length;
 let card;
@@ -34,10 +43,10 @@ function comparador(){
     return Math.random() - 0.5; 
 }
 
-function distribuiCartas(elemento){
+function distribuiCartas(element){
     let cards = document.querySelector(".cards");
     cards.innerHTML='';
-let pares = elemento/2;
+let pares = element/2;
 arrImg.sort(comparador);
 for(j=arrImg.length;j>pares;j--){
 
@@ -47,32 +56,54 @@ for(j=arrImg.length;j>pares;j--){
 for(i=0; i<2;i++){
 arrImg.sort(comparador);
 for(let cont=0; cont<pares;cont++){
-    let adcCards= `<div class="card inicial" onclick="selecionaCarta(this)"> 
+    let adcCards= `<div class="card" onclick="selecionaCarta(this)"> 
     <div class="card-back">
         <img class="img-back" src="./front.png">
     </div>
     <div class="card-front desativa">
-        ${arrImg[cont]}
+    <img class="img-front" src=${arrImg[cont]}>
     </div>`;
     cards.innerHTML+=adcCards;
 }
 }
 }
+
+
 function selecionaCarta(elemento){
-    let selecionado = elemento;
-    let inicial;
-    inicial = selecionado.classList.contains("inicial");
-if(inicial){
-    selecionado.classList.remove("inicial");
-    let pegacarta = elemento.querySelector(".card-back");
-    pegacarta.classList.remove("desativa");
-    let pegacarta2= elemento.querySelector(".card-front");
-    pegacarta2.classList.add("desativa");
-} else{
-    selecionado.classList.add("inicial");
-    let pegacarta = elemento.querySelector(".card-back");
-    pegacarta.classList.add("desativa");
-    let pegacarta2= elemento.querySelector(".card-front");
+    elemento.classList.add("selecionado");
+    if(document.querySelectorAll(".selecionado").length%2==1){
+    primeiraCarta=elemento;
+    pegacarta1 = elemento.querySelector(".card-back");
+    pegacarta1.classList.add("desativa");
+    pegacarta2= elemento.querySelector(".card-front");
     pegacarta2.classList.remove("desativa");
+    srcPr = primeiraCarta.querySelector(".img-front").getAttribute('src');
+}
+    else{
+    segundaCarta=elemento;
+    pegacarta3 = elemento.querySelector(".card-back");
+    pegacarta3.classList.add("desativa");
+    pegacarta4= elemento.querySelector(".card-front");
+    pegacarta4.classList.remove("desativa");
+    srcSg = segundaCarta.querySelector(".img-front").getAttribute('src');
+    if( srcPr === srcSg) {
+        primeiraCarta.classList.add("iguais");
+        segundaCarta.classList.add("iguais");
+        primeiraCarta.classList.remove("selecionado");
+        segundaCarta.classList.remove("selecionado");
+        console.log("você acertou");
+    } else{
+        setTimeout(viraCarta,1000);
     }
-    }
+    }}
+
+function viraCarta (){
+ primeiraCarta.classList.remove("selecionado");
+  segundaCarta.classList.remove("selecionado");
+  pegacarta1.classList.remove("desativa");
+  pegacarta2.classList.add("desativa");
+  pegacarta3.classList.remove("desativa");
+  pegacarta4.classList.add("desativa");
+}
+
+
