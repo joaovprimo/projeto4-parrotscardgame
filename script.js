@@ -9,6 +9,8 @@ let srcPr;
 let srcSg ;
 let retira; 
 let retira2;
+let contadorJogadas=0;
+let ip;
 let arrImg=[
 "./bobrossparrot.gif",
 "./explodyparrot.gif",
@@ -20,10 +22,11 @@ let arrImg=[
 ];
 let contador = arrImg.length;
 let card;
+let carta;
 cardGame()
 function cardGame(){
     card = Number(prompt("Insira a quantidade de cartas que irá jogar:"));
-    let carta= card;
+    carta= card;
 while(isNaN(carta)){
         carta = prompt("Numero inválido, insira um número par entre 4 e 14:");
     }
@@ -78,6 +81,8 @@ function selecionaCarta(elemento){
     pegacarta2= elemento.querySelector(".card-front");
     pegacarta2.classList.remove("desativa");
     srcPr = primeiraCarta.querySelector(".img-front").getAttribute('src');
+    contadorJogadas++;
+    console.log(contadorJogadas);
 }
     else{
     segundaCarta=elemento;
@@ -86,6 +91,8 @@ function selecionaCarta(elemento){
     pegacarta4= elemento.querySelector(".card-front");
     pegacarta4.classList.remove("desativa");
     srcSg = segundaCarta.querySelector(".img-front").getAttribute('src');
+    contadorJogadas++;
+    console.log(contadorJogadas);
     if( srcPr === srcSg) {
         primeiraCarta.classList.add("iguais");
         segundaCarta.classList.add("iguais");
@@ -95,7 +102,9 @@ function selecionaCarta(elemento){
     } else{
         setTimeout(viraCarta,1000);
     }
-    }}
+} 
+ip=setTimeout(ganhaJogo,2000);
+}
 
 function viraCarta (){
  primeiraCarta.classList.remove("selecionado");
@@ -106,4 +115,10 @@ function viraCarta (){
   pegacarta4.classList.add("desativa");
 }
 
-
+ function ganhaJogo(){
+let totalIguais = document.querySelectorAll(".iguais").length;
+    if (totalIguais === carta ){
+        alert(`Parabéns você ganhou o jogo com ${contadorJogadas} jogadas!!`);
+    }
+    clearInterval(ip);
+ }
