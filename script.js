@@ -103,7 +103,7 @@ function selecionaCarta(elemento){
         setTimeout(viraCarta,1000);
     }
 } 
-ip=setTimeout(ganhaJogo,2000);
+ip=setTimeout(ganhaJogo,1500);
 }
 
 function viraCarta (){
